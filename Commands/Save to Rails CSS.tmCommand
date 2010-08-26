@@ -6,19 +6,27 @@
 	<string>saveActiveFile</string>
 	<key>command</key>
 	<string>#!/usr/bin/env ruby
+source_path = 'app/stylesheets'
+destination_path = 'public/stylesheets'
+
 file = STDIN.read[/lessc: ([^*]+\.less)/, 1] || ENV["TM_FILEPATH"]
-system("lessc \"#{file}\"")</string>
+file_with_directories = file.to_s.sub(File.join(ENV['TM_PROJECT_DIRECTORY'], source_path), '')[1..-1]
+
+destination_file = file_with_directories.sub(/(le?|c)ss$/, "css")
+destination = File.join(ENV['TM_PROJECT_DIRECTORY'],'public','stylesheets', destination_file)
+
+system("lessc \"#{file}\" \"#{destination}\" --compress")</string>
 	<key>input</key>
 	<string>document</string>
 	<key>keyEquivalent</key>
-	<string>^s</string>
+	<string>@s</string>
 	<key>name</key>
-	<string>Save to CSS</string>
+	<string>Save to Rails CSS</string>
 	<key>output</key>
 	<string>showAsTooltip</string>
 	<key>scope</key>
 	<string>source.css.less</string>
 	<key>uuid</key>
-	<string>78788223-5E5E-434E-98BE-17BCDF600611</string>
+	<string>654BDD32-0F71-42BF-B490-7B32C0443217</string>
 </dict>
 </plist>
