@@ -7,8 +7,12 @@
 	<key>command</key>
 	<string>#!/usr/bin/env ruby
 file = STDIN.read[/lessc: ([^*]+\.less)/, 1] || ENV["TM_FILEPATH"]
-destination_file = file.gsub(/.less/, ".css")
-system("lessc \"#{file}\" \"#{destination_file}\"")</string>
+
+# unless it is a partial, create the file..
+unless file =~ /^_/
+  destination_file = file.gsub(/.less/, ".css")
+  system("lessc \"#{file}\" \"#{destination_file}\"")
+end</string>
 	<key>input</key>
 	<string>document</string>
 	<key>keyEquivalent</key>
