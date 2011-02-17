@@ -6,6 +6,8 @@
 	<string>saveActiveFile</string>
 	<key>command</key>
 	<string>#!/usr/bin/env ruby
+
+lessc_command = ENV["TM_LESSC"] || "lessc"
 source_path = 'app/stylesheets'
 destination_path = 'public/stylesheets'
 
@@ -15,7 +17,7 @@ file_with_directories = file.to_s.sub(File.join(ENV['TM_PROJECT_DIRECTORY'], sou
 destination_file = file_with_directories.sub(/(le?|c)ss$/, "css")
 destination = File.join(ENV['TM_PROJECT_DIRECTORY'],'public','stylesheets', destination_file)
 
-system("lessc \"#{file}\" \"#{destination}\" --compress") if File.exists?(destination)</string>
+system("#{lessc_command} \"#{file}\" \"#{destination}\" --compress") if File.exists?(destination)</string>
 	<key>input</key>
 	<string>document</string>
 	<key>keyEquivalent</key>

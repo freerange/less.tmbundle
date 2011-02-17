@@ -6,12 +6,15 @@
 	<string>saveActiveFile</string>
 	<key>command</key>
 	<string>#!/usr/bin/env ruby
+
+lessc_command = ENV["TM_LESSC"] || "lessc"
+
 file = STDIN.read[/lessc: ([^*]+\.less)/, 1] || ENV["TM_FILEPATH"]
 
 # unless it is a partial, create the file..
 unless file =~ /^_/
   destination_file = file.gsub(/.less/, ".css")
-  system("lessc \"#{file}\" \"#{destination_file}\"")
+  system("#{lessc_command} \"#{file}\" \"#{destination_file}\"")
 end</string>
 	<key>input</key>
 	<string>document</string>
